@@ -1,15 +1,15 @@
+import src.*;
 public class Symulacja
 {
-    public static int main(String args[])
+    public static void main(String args[])
     {
         if(args.length != 2)
         {
             System.out.println("Zła liczba parametrów programu!");
-            return 1;
+            System.exit(1);
         }
 
-        
-
-        return 0;
+        Parametry parametry = new Parametry(args[1]);
+        Plansza plansza = new Plansza(args[0], parametry);
     }
 }
