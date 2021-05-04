@@ -18,4 +18,10 @@ public final class Puste extends Pole
     {
         return;
     }
+
+    @Override
+    public final boolean czyMaPożywienie()
+    {
+        return false;
+    }
 }

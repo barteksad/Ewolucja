@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 public class Parametry 
 {
-    private static int liczba_parametrów = 15;
+    private static int liczba_parametrów = 16;
     private static TreeSet<Character> dozwolone_ruchy = new TreeSet<Character>(Arrays.asList('l', 'p', 'i', 'w', 'j'));
 
     private int ile_tur;
@@ -50,6 +50,7 @@ public class Parametry
             try
             {
                 parametr = scanner.next();
+                wczytane_parametry.add(parametr);
                 if(parametr.equals("pocz_prog"))
                 {
                     if(!this.sprawdźUstawPoczProg(scanner))
@@ -82,7 +83,6 @@ public class Parametry
                 System.exit(1);
             }
 
-            wczytane_parametry.add(parametr);
         }
         if(wczytane_parametry.size() != Parametry.liczba_parametrów)
         {
@@ -206,7 +206,14 @@ public class Parametry
     }
     public ArrayList<Character> pocz_prog()
     {
-        return pocz_prog;
+        ArrayList<Character> kopia = new ArrayList<Character>();
+        for(char c : pocz_prog)
+            kopia.add(c);
+        return kopia;
+    }
+    public ArrayList<Character> spis_instr()
+    {
+        return spis_instr;
     }
     public int pocz_energia()
     {

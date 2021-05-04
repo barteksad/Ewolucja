@@ -33,4 +33,10 @@ public final class Żywieniowe extends Pole
         ile_już_rośnie += 1;
         ile_już_rośnie %= ile_rośnie_jedzenie;
     }
+
+    @Override
+    public final boolean czyMaPożywienie()
+    {
+        return (ile_już_rośnie == ile_rośnie_jedzenie);
+    }
 }

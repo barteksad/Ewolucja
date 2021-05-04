@@ -9,7 +9,7 @@ public class Symulacja
             System.exit(1);
         }
 
-        Parametry parametry = new Parametry(args[1]);
-        Plansza plansza = new Plansza(args[0], parametry);
+        Ewolucja ewolucja = new Ewolucja(args[0], args[1]);
+        ewolucja.symuluj();
     }
 }

@@ -1,7 +1,6 @@
 package src;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -59,4 +58,61 @@ public class Plansza
             }
     }
     }    
+
+    public Pole dajPole(int x, int y)
+    {
+        return plansza.get(y * rozmiar_planszy_x + x);
+    }
+
+    public Pole dajSąsiada(Pole pole, int kierunek)
+    {
+        int x = pole.x();
+        int y = pole.y();
+
+        switch(kierunek)
+        {
+            case 0:
+                y += rozmiar_planszy_y - 1;
+                break;
+            case 1:
+                x += rozmiar_planszy_x + 1;
+                break;
+            case 2:
+                y += rozmiar_planszy_y + 1;
+                break;
+            case 3:
+                x += rozmiar_planszy_x - 1;
+                break;
+            case 4: // skos prawa góra
+                y += rozmiar_planszy_y - 1;
+                x += rozmiar_planszy_x + 1;
+                break;
+            case 5: // skos prawy dół
+                y += rozmiar_planszy_y + 1;
+                x += rozmiar_planszy_x + 1;
+            case 6: // skos lewy dół
+                y += rozmiar_planszy_y + 1;
+                x += rozmiar_planszy_x - 1;
+                break;
+            case 7: // skos lewa góra
+                y += rozmiar_planszy_y - 1;
+                x += rozmiar_planszy_x - 1;
+                break;
+            
+        }
+
+        x %= rozmiar_planszy_x;
+        y %= rozmiar_planszy_y;
+
+        return dajPole(x, y);
+    }
+
+    public int ileZŻywnością()
+    {
+        int ile = 0;
+        for(Pole p: plansza)
+            if(p.czyMaPożywienie())
+                ile++;
+        return ile;
+    }
 }

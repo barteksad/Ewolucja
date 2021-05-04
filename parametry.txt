@@ -1,9 +1,9 @@
-ile_tur 100
-rozmiar_planszy_x 20
-rozmiar_planszy_y 20
-pocz_ile_robów 100
-pocz_prog l p i w w w w w l j j w i i i i
-pocz_energia 100
+ile_tur 10000
+rozmiar_planszy_x 400
+rozmiar_planszy_y 400
+pocz_ile_robów 1000
+pocz_prog l p i w w w w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i
+pocz_energia 1000
 ile_daje_jedzenie 3
 ile_rośnie_jedzenie 3
 koszt_tury 1

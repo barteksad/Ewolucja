@@ -24,4 +24,12 @@ public abstract class Pole
     abstract int dajPożywienie();
 
     abstract void symulujTure();
+
+    abstract boolean czyMaPożywienie();
+
+    @Override
+    public String toString()
+    {
+        return "(" + x + "," + y + ")";
+    }
 }
