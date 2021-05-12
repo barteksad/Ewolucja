@@ -1,4 +1,4 @@
-package src;
+package zad1;
 
 public final class Żywieniowe extends Pole 
 {
@@ -18,7 +18,7 @@ public final class Żywieniowe extends Pole
     @Override
     public final int dajPożywienie()
     {
-        if(ile_już_rośnie == ile_rośnie_jedzenie)
+        if(ile_już_rośnie == ile_rośnie_jedzenie || ile_rośnie_jedzenie == 0)
         {
             ile_już_rośnie = 0;
             return ile_daje_jedzenie;
@@ -30,8 +30,11 @@ public final class Żywieniowe extends Pole
     @Override 
     public final void symulujTure()
     {
-        ile_już_rośnie += 1;
-        ile_już_rośnie %= ile_rośnie_jedzenie;
+        if(ile_rośnie_jedzenie != 0)
+        {
+            ile_już_rośnie += 1;
+            ile_już_rośnie %= ile_rośnie_jedzenie;
+        }
     }
 
     @Override

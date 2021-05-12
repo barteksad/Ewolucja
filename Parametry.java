@@ -1,8 +1,9 @@
-package src;
+package zad1;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -27,7 +28,6 @@ public class Parametry
     private int pr_dodania_instr;
     private int pr_zmiany_instr;
     private int co_ile_wypisz;
-    
 
     public Parametry(String ścierzka)
     {
@@ -43,50 +43,51 @@ public class Parametry
 
         TreeSet<String> wczytane_parametry = new TreeSet<String>();
 
-        while(scanner.hasNext())
+        try
         {
-            String parametr = "";
-            int wartość = -1;
-            try
+            while(scanner.hasNextLine())
             {
-                parametr = scanner.next();
+                String linia = scanner.nextLine();
+                Scanner skan_lini = new Scanner(linia);
+                String parametr = skan_lini.next();
+                int ile_wczytano = parametr.length();
+
+                if(wczytane_parametry.contains(parametr))
+                    throw new InputMismatchException();
                 wczytane_parametry.add(parametr);
+
                 if(parametr.equals("pocz_prog"))
                 {
-                    if(!this.sprawdźUstawPoczProg(scanner))
-                    {
-                        System.out.println("Zły format pliku z parametrami!\n");
-                        System.exit(1);
-                    }
-                    continue;
+                    if(!this.sprawdźUstawPoczProg(skan_lini))
+                        throw new InputMismatchException();
+                    ile_wczytano += pocz_prog.size() * 2 - 1;             
                 }
-                if(parametr.equals("spis_instr"))
+                else if(parametr.equals("spis_instr"))
                 {
-                    if(!this.sprawdźUstawSpisInstr(scanner))
-                    {
-                        System.out.println("Zły format pliku z parametrami!\n");
-                        System.exit(1);
-                    }
-                    continue;
+                    if(!this.sprawdźUstawSpisInstr(skan_lini))
+                        throw new InputMismatchException();   
+                    ile_wczytano += spis_instr.size() * 2 - 1;                       
                 }
-                wartość = scanner.nextInt();
-                System.out.println(parametr + " " + wartość);
-            }catch(Exception e)
-            {
-                System.out.println("Zły format pliku z parametrami!\n" + e);
-                System.exit(1);
+                else 
+                {
+                    int wartość = skan_lini.nextInt();
+                    ile_wczytano += ("" + wartość).length();
+                    
+                    if(wartość < 0 )
+                        throw new InputMismatchException();             
+                    if(!this.sprawdźUstawParametr(parametr, wartość))
+                        throw new InputMismatchException();             
+                }
+                if(ile_wczytano + 1 != linia.length())
+                    throw new InputMismatchException();    
             }
-
-            if(!this.sprawdźUstawParametr(parametr, wartość))
-            {
-                System.out.println("Zły format pliku z parametrami!\n");
-                System.exit(1);
-            }
-
-        }
-        if(wczytane_parametry.size() != Parametry.liczba_parametrów)
+            if(wczytane_parametry.size() != Parametry.liczba_parametrów)
+                throw new InputMismatchException();    
+            if(!spis_instr.containsAll(pocz_prog))
+                throw new InputMismatchException();    
+        }catch(Exception e)
         {
-            System.out.println("Zły format pliku z parametrami!\n");
+            System.out.println("Zły format pliku z parametrami!\n" + e);
             System.exit(1);
         }
     }
@@ -111,6 +112,8 @@ public class Parametry
             else
                 return false;
         }
+        if(spacja == false)
+            return false;
         return true;
     }
 
@@ -122,19 +125,24 @@ public class Parametry
 
         for(int i = 0;i < input.length(); i++)
         {
-            if(!(input.charAt(i) == ' ' ^ spacja))
+            char nowy = input.charAt(i);
+            if(!(nowy == ' ' ^ spacja))
             {
                 spacja = !spacja;
                 if(!spacja)
                     continue;
-                if(!Parametry.dozwolone_ruchy.contains(input.charAt(i)))
+                if(!Parametry.dozwolone_ruchy.contains(nowy))
                     return false;
-                    spis_instr.add(input.charAt(i));
+                if(spis_instr.contains(nowy))
+                    return false;
+                spis_instr.add(nowy);
             }
             else
                 return false;
         }
-        return true;
+        if(spacja == false)
+            return false;
+        return true;    
     }
 
     private boolean sprawdźUstawParametr(String parametr, int wartość)
@@ -145,9 +153,13 @@ public class Parametry
                 ile_tur = wartość;
                 return true;
             case "rozmiar_planszy_x":
+                if(wartość == 0)
+                    return false;
                 rozmiar_planszy_x = wartość;
                 return true;
             case "rozmiar_planszy_y":
+                if(wartość == 0)
+                    return false;
                 rozmiar_planszy_y = wartość;
                 return true;
             case "pocz_ile_robów":
@@ -166,21 +178,31 @@ public class Parametry
                 pocz_energia = wartość;
                 return true;
             case "pr_powielenia":
+                if(wartość > 100)
+                    return false;
                 pr_powielenia = wartość;
                 return true;
             case "ułamek_energii_rodzica":
                 ułamek_energii_rodzica = wartość;
                 return true;
             case "pr_usunięcia_instr":
+                if(wartość > 100)
+                    return false;
                 pr_usunięcia_instr = wartość;
                 return true;
             case "pr_dodania_instr":
+                if(wartość > 100)
+                    return false;
                 pr_dodania_instr = wartość;
                 return true;
             case "pr_zmiany_instr":
+                if(wartość > 100)
+                    return false;
                 pr_zmiany_instr = wartość;
                 return true;
             case "co_ile_wypisz":
+                if(wartość == 0)
+                    return false;
                 co_ile_wypisz = wartość;
                 return true;
             default:

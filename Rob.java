@@ -1,4 +1,4 @@
-package src;
+package zad1;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -37,12 +37,12 @@ public class Rob
             return null;
         ArrayList<Character> nowy = parametry.pocz_prog();
 
-        double p = Rob.gen.nextDouble();
-        if(p >= parametry.pr_usunięcia_instr())
-            nowy.remove(nowy.size());
+        int p = Rob.gen.nextInt(100) + 1;
+        if(p <= parametry.pr_usunięcia_instr())
+            nowy.remove(nowy.size() - 1);
 
-        p = Rob.gen.nextDouble();
-        if(p >= parametry.pr_dodania_instr())
+        p = Rob.gen.nextInt(100) + 1;
+        if(p <= parametry.pr_dodania_instr())
         {
             int idx = Rob.gen.nextInt(parametry.spis_instr().size());
             nowy.add(parametry.spis_instr().get(idx));
@@ -50,8 +50,8 @@ public class Rob
 
         if(nowy.size() > 0)
         {
-            p = Rob.gen.nextDouble();
-            if(p >= parametry.pr_zmiany_instr())
+            p = Rob.gen.nextInt(100) + 1;
+            if(p <= parametry.pr_zmiany_instr())
             {
                 int idx = Rob.gen.nextInt(nowy.size());
                 int instr_idx = Rob.gen.nextInt(parametry.spis_instr().size());
@@ -66,9 +66,10 @@ public class Rob
         Rob nowy = null;
         if(energia >= parametry.ułamek_energii_rodzica())
         {
-            double p = Rob.gen.nextDouble();
-            if(p >= parametry.pr_powielenia())
+            int p = Rob.gen.nextInt(100) + 1;
+            if(p <= parametry.pr_powielenia())
             {
+                System.out.println("POWIEL p = " + p + " prawd = " + parametry.pr_powielenia());
                 ArrayList<Character> nowy_program = mutujProgram(parametry);
                 nowy = new Rob(parametry, nowy_program, plansza, parametry.ułamek_energii_rodzica(), this.kierunek);
                 this.energia -= parametry.ułamek_energii_rodzica();

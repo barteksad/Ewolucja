@@ -1,16 +1,16 @@
-ile_tur 10000
+ile_tur 100
 rozmiar_planszy_x 400
 rozmiar_planszy_y 400
-pocz_ile_robów 1000
+pocz_ile_robów 1
 pocz_prog l p i w w w w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i w w l j j w i i i i l p i w j i i
 pocz_energia 1000
 ile_daje_jedzenie 3
-ile_rośnie_jedzenie 3
-koszt_tury 1
-pr_powielenia 20
+ile_rośnie_jedzenie 1
+koszt_tury 50
+pr_powielenia 0
 ułamek_energii_rodzica 10
 pr_usunięcia_instr 20
 pr_dodania_instr 20
 pr_zmiany_instr 20
-co_ile_wypisz 5
 spis_instr l p i w j
+co_ile_wypisz 5

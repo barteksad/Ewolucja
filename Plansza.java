@@ -1,4 +1,4 @@
-package src;
+package zad1;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,17 +25,24 @@ public class Plansza
         rozmiar_planszy_x = parametry.rozmiar_planszy_x();
         rozmiar_planszy_y = parametry.rozmiar_planszy_y();
         plansza = new ArrayList<Pole>(rozmiar_planszy_x * rozmiar_planszy_y);
-
+        
+        boolean sukces = true;
         for(int i = 0; i < rozmiar_planszy_y; i++)
         {
-            boolean sukces = true;
             if(!sc.hasNext())
+            {
                 sukces = false;
+                break;
+            }
             else
             {
 
                 String input = sc.nextLine();
-                
+                if(input.length() != rozmiar_planszy_x)
+                {
+                    sukces = false;
+                    break;
+                }
                 for(int j = 0; j < rozmiar_planszy_x; j++)
                 {
                     char c = input.charAt(j);
@@ -50,13 +57,14 @@ public class Plansza
                         plansza.add(new Żywieniowe(j, i, parametry.ile_daje_jedzenie(), parametry.ile_rośnie_jedzenie()));   
                 }
             }
-
-            if(!sukces)
-            {
-                System.out.println("Zły format pliku z planszą!\n");
-                System.exit(1);
-            }
-    }
+        }
+        if(sc.hasNext() || sc.hasNextLine())
+            sukces = false;
+        if(!sukces)
+        {
+            System.out.println("Zły format pliku z planszą!\n");
+            System.exit(1);
+        }
     }    
 
     public Pole dajPole(int x, int y)

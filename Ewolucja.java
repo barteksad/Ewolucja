@@ -1,4 +1,4 @@
-package src;
+package zad1;
 
 import java.util.LinkedList;
 
@@ -48,7 +48,7 @@ public class Ewolucja
         System.out.print(this);
     }
 
-    public void wypiszStatystyki()
+    private String statystykaProgram()
     {
         StringBuilder acc = new StringBuilder();
 
@@ -68,29 +68,55 @@ public class Ewolucja
         int średnia = roby.size() > 0 ? suma/roby.size() : 0;
         acc.append("prog: " + min_prog + "/" + średnia + "/" + max_prog + ", ");
 
+        return acc.toString();
+    }
+
+    private String statystykaEnergia()
+    {
+        StringBuilder acc = new StringBuilder();
+
         int min_energia = roby.get(0).energia();
         int max_energia = roby.get(0).energia();
-        suma = 0;
+        int suma = 0;
         for(Rob r: roby)
         {
-            min_energia = Math.min(min_prog, r.energia());
-            max_energia = Math.max(max_prog, r.energia());
+            min_energia = Math.min(min_energia, r.energia());
+            max_energia = Math.max(max_energia, r.energia());
             suma += r.energia();
         }
-        średnia = roby.size() > 0 ? suma/roby.size() : 0;
+        int średnia = roby.size() > 0 ? suma/roby.size() : 0;
         acc.append("energ: " + min_energia + "/" + średnia + "/" + max_energia + ", ");
+
+        return acc.toString();
+    } 
+
+    private String statystykaWiek()
+    {
+        StringBuilder acc = new StringBuilder();
+
         
         int min_wiek = roby.get(0).wiek();
         int max_wiek = roby.get(0).wiek();
-        suma = 0;
+        int suma = 0;
         for(Rob r: roby)
         {
-            min_wiek = Math.min(min_prog, r.wiek());
-            max_wiek = Math.max(max_prog, r.wiek());
+            min_wiek = Math.min(min_wiek, r.wiek());
+            max_wiek = Math.max(max_wiek, r.wiek());
             suma += r.wiek();
         }
-        średnia = roby.size() > 0 ? suma/roby.size() : 0;
-        acc.append("wiek: " + min_wiek + "/" + średnia + "/" + max_wiek);
+        int średnia = roby.size() > 0 ? suma/roby.size() : 0;
+        acc.append("wiek: " + min_wiek + "/" + średnia + "/" + max_wiek); 
+
+        return acc.toString();
+    }
+
+    public void wypiszStatystyki()
+    {
+        StringBuilder acc = new StringBuilder();
+
+        acc.append(statystykaProgram());
+        acc.append(statystykaEnergia());
+        acc.append(statystykaWiek());
         
         System.out.println(acc);
     }
@@ -104,7 +130,6 @@ public class Ewolucja
         for(Rob r: roby)
             acc.append(r + "\n");
         acc.append("- - - - - - - - - -- - - - - - - - - -- - - - - - - - - -\n");
-
 
         return acc.toString();
     }

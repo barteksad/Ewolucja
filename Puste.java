@@ -1,4 +1,4 @@
-package src;
+package zad1;
 
 public final class Puste extends Pole 
 {

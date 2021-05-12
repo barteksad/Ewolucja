@@ -1,4 +1,4 @@
-import src.*;
+package zad1;
 public class Symulacja
 {
     public static void main(String args[])
